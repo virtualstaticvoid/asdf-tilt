@@ -1,6 +1,6 @@
 language: c
 
-script: asdf plugin-test tilt https://github.com/virtualstaticvoid/asdf-tilt.git
+script: asdf plugin-test tilt https://github.com/virtualstaticvoid/asdf-tilt.git --asdf-tool-version 0.4.3
 
 before_script:
   - git clone --branch master --depth=1 https://github.com/asdf-vm/asdf.git asdf
