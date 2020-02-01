@@ -35,11 +35,21 @@ get_arch() {
 
 get_download_url() {
   local install_type=$1
+  local tag=$2
   local version=$2
 
   local platform=$(get_platform)
   local arch=$(get_arch)
-  echo "https://github.com/windmilleng/tilt/releases/download/v${version}/tilt.${version}.${platform}.${arch}.tar.gz"
+
+  # HACK: asdf wants numeric version numbers, but most start with a "v"
+  # since people usually tag releases in GitHub with a vX.X.X and _not_ X.X.X
+  # so need to prefix version based on this fragile logic :-/
+  # in case the version is in some other format such as FOOBAR.X.X.X
+  if [[ "$tag" =~ ^[0-9] ]]; then
+    tag="v${tag}"
+  fi
+
+  echo "https://github.com/windmilleng/tilt/releases/download/${tag}/tilt.${version}.${platform}.${arch}.tar.gz"
 }
 
 install_plugin "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
