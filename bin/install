@@ -49,7 +49,7 @@ get_download_url() {
     tag="v${tag}"
   fi
 
-  echo "https://github.com/windmilleng/tilt/releases/download/${tag}/tilt.${version}.${platform}.${arch}.tar.gz"
+  echo "https://github.com/tilt-dev/tilt/releases/download/${tag}/tilt.${version}.${platform}.${arch}.tar.gz"
 }
 
 install_plugin "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
