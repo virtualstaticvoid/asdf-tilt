@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-repo=windmilleng/tilt
+repo=tilt-dev/tilt
 
 cmd="curl --silent --location"
 releases_path="https://api.github.com/repos/$repo/releases"
