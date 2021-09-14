@@ -30,7 +30,14 @@ get_platform() {
 }
 
 get_arch() {
-  [ "x86_64" = "$(uname -m)" ] && echo "x86_64" || echo "i386"
+  local arch="$(uname -m)"
+  if [ "$arch" == "x86_64" ]; then 
+    echo "x86_64"
+  elif [ "$arch" == "arm64"] || [ "$arch" == "aarch64" ]; then
+    echo "arm64"
+  else 
+    echo "i386"
+  fi
 }
 
 get_download_url() {
@@ -40,6 +47,13 @@ get_download_url() {
 
   local platform=$(get_platform)
   local arch=$(get_arch)
+  local extra=""
+  
+  # Currently ARM64 builds have _ALPHA prepended to them
+  # we probably want better logic to try both of them later.
+  if [ "$arch" == "arm64" ]; then
+    extra="_ALPHA"
+  fi
 
   # HACK: asdf wants numeric version numbers, but most start with a "v"
   # since people usually tag releases in GitHub with a vX.X.X and _not_ X.X.X
@@ -49,7 +63,7 @@ get_download_url() {
     tag="v${tag}"
   fi
 
-  echo "https://github.com/tilt-dev/tilt/releases/download/${tag}/tilt.${version}.${platform}.${arch}.tar.gz"
+  echo "https://github.com/tilt-dev/tilt/releases/download/${tag}/tilt.${version}.${platform}.${arch}${extra}.tar.gz"
 }
 
 install_plugin "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
