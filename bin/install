@@ -55,7 +55,7 @@ get_download_url() {
   # arm64 builds may have _ALPHA prepended to them
   # the last alpha release was v0.22.14
   # https://github.com/tilt-dev/tilt/pull/5078
-  if [ "$arch" == "arm64" ] && [ "$(printf '%s\n' "0.22.15" "$version" | sort -rV | head -n1)" == "0.22.15" ]; then
+  if [ "$arch" == "arm64" ] && [ "$(printf '%s\n' "0.22.14" "$version" | sort -V | head -n1)" == "$version" ]; then
     extra="_ALPHA"
   fi
 
