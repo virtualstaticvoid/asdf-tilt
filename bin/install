@@ -52,9 +52,10 @@ get_download_url() {
   local arch=$(get_arch)
   local extra=""
   
-  # Currently ARM64 builds have _ALPHA prepended to them
-  # we probably want better logic to try both of them later.
-  if [ "$arch" == "arm64" ]; then
+  # arm64 builds may have _ALPHA prepended to them
+  # the last alpha release was v0.22.14
+  # https://github.com/tilt-dev/tilt/pull/5078
+  if [ "$arch" == "arm64" ] && [ "$(printf '%s\n' "0.22.15" "$version" | sort -rV | head -n1)" == "0.22.15" ]; then
     extra="_ALPHA"
   fi
 
