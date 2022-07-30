@@ -8,6 +8,7 @@
 
 ```
 asdf plugin-add tilt https://github.com/virtualstaticvoid/asdf-tilt.git
+asdf install tilt latest
 ```
 
 ## Use
